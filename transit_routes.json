@@ -1,0 +1,10 @@
+{
+  "routes": [
+    {"id": "north_rail", "name": "North Rail Link", "mode": "train", "co2_g_per_km_per_person": 14, "capacity": 900, "typical_headway_min": 6},
+    {"id": "east_shuttle", "name": "East Shuttle Hub", "mode": "bus_shuttle", "co2_g_per_km_per_person": 68, "capacity": 60, "typical_headway_min": 4},
+    {"id": "south_rail", "name": "South Rail Link", "mode": "train", "co2_g_per_km_per_person": 14, "capacity": 900, "typical_headway_min": 7},
+    {"id": "west_shuttle", "name": "West Shuttle Hub", "mode": "bus_shuttle", "co2_g_per_km_per_person": 68, "capacity": 60, "typical_headway_min": 5},
+    {"id": "rideshare_zone", "name": "Rideshare Pickup Zone", "mode": "rideshare", "co2_g_per_km_per_person": 180, "capacity": 4, "typical_headway_min": 1},
+    {"id": "bike_valet", "name": "Bike Valet Parking", "mode": "bicycle", "co2_g_per_km_per_person": 0, "capacity": 300, "typical_headway_min": 0}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "venue": "MetLife Stadium (Sample Venue)",
+  "gates": [
+    {"id": "A", "name": "Gate A - North Plaza", "capacity_per_min": 55, "accessible": true, "nearest_transit": "North Rail Link"},
+    {"id": "B", "name": "Gate B - East Concourse", "capacity_per_min": 60, "accessible": true, "nearest_transit": "East Shuttle Hub"},
+    {"id": "C", "name": "Gate C - South Plaza", "capacity_per_min": 45, "accessible": true, "nearest_transit": "South Rail Link"},
+    {"id": "D", "name": "Gate D - West Concourse", "capacity_per_min": 50, "accessible": false, "nearest_transit": "West Shuttle Hub"},
+    {"id": "E", "name": "Gate E - VIP/Accessible Entry", "capacity_per_min": 25, "accessible": true, "nearest_transit": "North Rail Link"},
+    {"id": "F", "name": "Gate F - Media & Staff", "capacity_per_min": 20, "accessible": true, "nearest_transit": "East Shuttle Hub"}
+  ],
+  "amenities": [
+    {"type": "accessible_restroom", "near_gate": "C", "label": "Accessible Restroom - South Concourse, Level 1"},
+    {"type": "accessible_restroom", "near_gate": "E", "label": "Accessible Restroom - VIP Entry, Level 1"},
+    {"type": "first_aid", "near_gate": "B", "label": "First Aid Station - East Concourse"},
+    {"type": "first_aid", "near_gate": "D", "label": "First Aid Station - West Concourse"},
+    {"type": "prayer_room", "near_gate": "A", "label": "Quiet/Prayer Room - North Plaza, Level 2"},
+    {"type": "sensory_room", "near_gate": "E", "label": "Low-Sensory Room for neurodivergent fans - VIP Entry"},
+    {"type": "water_refill", "near_gate": "F", "label": "Free Water Refill Station - Media Concourse"}
+  ]
+}
