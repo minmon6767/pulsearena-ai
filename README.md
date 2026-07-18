@@ -90,35 +90,8 @@ pulsearena-ai/
 └── LICENSE
 ```
 
-## 5. Deploying to Netlify (the part that actually matters)
 
-**Option A — one click, no local setup:**
-
-1. Push this repo to your own GitHub account (or fork it).
-2. Go to [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import an existing project** → connect your GitHub repo.
-3. Netlify will read `netlify.toml` automatically:
-   - Publish directory: `.` (the repo root — it's a static site, no build needed)
-   - Functions directory: `netlify/functions`
-4. Click **Deploy site**. That's it — no build command to configure, `netlify.toml` already has it (`echo` no-op).
-5. *(Optional, but recommended)* To turn on real GenAI responses: **Site configuration → Environment variables → Add a variable**
-   - Key: `ANTHROPIC_API_KEY`
-   - Value: your Anthropic API key
-   - Redeploy the site (Netlify → Deploys → Trigger deploy) for the env var to take effect.
-
-Without step 5, the site is still fully functional — every agent uses its offline fallback response instead of a live Claude-generated one, and the sidebar tells you which mode you're in.
-
-**Option B — Netlify CLI, if you want to test locally first:**
-
-```bash
-npm install -g netlify-cli
-netlify dev
-```
-
-This runs the static site *and* the function locally at `http://localhost:8888`, so you can test the full flow (including a real API key, if you export `ANTHROPIC_API_KEY` in your shell first) before pushing.
-
-**Why the earlier version didn't deploy:** Netlify only serves static files and short-lived serverless functions — it can't run a persistent Python process like Streamlit needs. This version is a genuine static site with a Netlify Function doing the one thing that needs a server (calling Claude with a secret key), so it fits the platform properly.
-
-## 6. Running the Tests
+## 5. Running the Tests
 
 ```bash
 npm test
@@ -126,7 +99,7 @@ npm test
 
 Runs entirely offline with Node's built-in test runner (`node --test`) — no API key, no network, no Netlify CLI required. This is also what runs automatically in CI on every push (`.github/workflows/tests.yml`).
 
-## 7. Local Preview Without Netlify CLI
+## 6. Local Preview Without Netlify CLI
 
 Since it's a static site, any local web server works — you just can't open `index.html` by double-clicking it (the browser will block the JSON `fetch` calls under the `file://` protocol). For example:
 
@@ -137,20 +110,20 @@ python3 -m http.server 8000
 
 The dashboard will load and the simulation will run — the GenAI calls will use the offline fallback since there's no Netlify Function running behind a plain static server. Use `netlify dev` (Option B above) if you want the full live-API flow locally.
 
-## 8. What's Real vs. What's Simulated (being upfront about it)
+## 7. What's Real vs. What's Simulated (being upfront about it)
 
 - **Simulated:** all live telemetry — gate queues, transit load, weather, incidents. There's no real stadium sensor feed for a hackathon, so `core/contextGraph.js` runs a seeded random walk instead. It's designed so a real feed could be swapped in later without touching any agent code.
 - **Real:** the GenAI layer. Every agent genuinely calls the Claude API through the Netlify Function when a key is configured, with prompts grounded in the (simulated) live data.
 - **Real:** the offline fallback logic. This isn't a placebo — it's a fully separate, hand-written response path per agent, tested in CI with no API key at all.
 
-## 9. Roadmap Beyond the Hackathon
+## 8. Roadmap Beyond the Hackathon
 
 - Replace simulated `contextGraph.js` with real gate-turnstile / CCTV-derived crowd density feeds
 - Add a real-time voice interface (Whisper + Claude) for the Wayfinder and AccessAI agents
 - Integrate live transit-provider APIs for GreenRoute
 - Push Ops Commander digests to a real control-room Slack/Teams channel via webhook
 
-## 10. License
+## 9. License
 
 MIT — see [LICENSE](LICENSE).
 
