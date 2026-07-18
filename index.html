@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PulseArena AI — FIFA World Cup 2026 Stadium Ops</title>
+<meta name="description" content="A GenAI operational intelligence mesh for FIFA World Cup 2026 stadiums — five agents, one shared live picture of the venue." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <h1>🏟️ PulseArena AI</h1>
+    <p class="tagline">A GenAI Operational Intelligence Mesh for FIFA World Cup 2026 Stadiums</p>
+
+    <div id="genaiStatus" class="status-pill status-pending">Checking GenAI status…</div>
+
+    <dl class="venue-facts">
+      <dt>Venue</dt><dd id="factVenue">—</dd>
+      <dt>Match</dt><dd id="factMatch">—</dd>
+      <dt>Weather</dt><dd id="factWeather">—</dd>
+      <dt>Sim tick</dt><dd id="factTick">0</dd>
+    </dl>
+
+    <button id="advanceBtn" class="btn btn-secondary btn-block">⏱️ Advance Simulation (+1 min)</button>
+
+    <label class="field-label" for="languageSelect">🌐 Fan-facing language</label>
+    <select id="languageSelect" class="select"></select>
+    <p class="hint">Applies to the Wayfinder and AccessAI tabs.</p>
+  </aside>
+
+  <main class="content">
+    <p class="lede">Five specialised GenAI agents sharing one live Stadium Context Graph — one coherent operational picture, five audiences.</p>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="fan" role="tab">🧍 Fan — Wayfinder</button>
+      <button class="tab-btn" data-tab="crowd" role="tab">🎽 Volunteer — Crowd Marshal</button>
+      <button class="tab-btn" data-tab="access" role="tab">🧑‍🦽 Accessibility — AccessAI</button>
+      <button class="tab-btn" data-tab="transport" role="tab">🚌 Transport — GreenRoute</button>
+      <button class="tab-btn" data-tab="ops" role="tab">🎛️ Control Room — Ops Commander</button>
+    </nav>
+
+    <!-- Fan / Wayfinder -->
+    <section id="tab-fan" class="tab-panel active">
+      <h2>Ask Wayfinder anything about getting around the stadium</h2>
+      <p class="muted">Multilingual, grounded in live gate &amp; amenity data.</p>
+
+      <div id="exampleQuestions" class="chip-row"></div>
+
+      <div class="field-row">
+        <input id="fanQuestion" type="text" class="text-input" placeholder="Type your own question…" />
+        <button id="askWayfinderBtn" class="btn btn-primary">Ask Wayfinder</button>
+      </div>
+
+      <div id="fanResult" class="result-box hidden"></div>
+    </section>
+
+    <!-- Volunteer / Crowd Marshal -->
+    <section id="tab-crowd" class="tab-panel">
+      <h2>Live gate status &amp; volunteer directive</h2>
+
+      <table class="data-table" id="gateTable">
+        <thead>
+          <tr><th>Gate</th><th>Queue Length</th><th>Wait (min)</th><th>Trend</th><th>Accessible</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div id="gateChart" class="bar-chart"></div>
+
+      <button id="crowdMarshalBtn" class="btn btn-primary">Generate Crowd Marshal Directive</button>
+      <div id="crowdResult" class="result-box hidden"></div>
+    </section>
+
+    <!-- Accessibility / AccessAI -->
+    <section id="tab-access" class="tab-panel">
+      <h2>Accessibility support</h2>
+      <p class="muted">Simplified, calm, concrete guidance for fans and staff.</p>
+
+      <label class="field-label" for="needType">Type of support needed</label>
+      <select id="needType" class="select">
+        <option>General accessibility</option>
+        <option>Mobility / Wheelchair access</option>
+        <option>Sensory-friendly / Low-stimulation</option>
+        <option>Visual impairment</option>
+        <option>Hearing impairment</option>
+      </select>
+
+      <label class="field-label" for="accessRequest">Describe what's needed</label>
+      <textarea id="accessRequest" class="textarea" rows="3">I use a wheelchair and need the closest accessible entry with a short wait.</textarea>
+
+      <button id="accessBtn" class="btn btn-primary">Ask AccessAI Companion</button>
+      <div id="accessResult" class="result-box hidden"></div>
+    </section>
+
+    <!-- Transport / GreenRoute -->
+    <section id="tab-transport" class="tab-panel">
+      <h2>Sustainable transport recommendation</h2>
+
+      <table class="data-table" id="transitTable">
+        <thead>
+          <tr><th>Route</th><th>Mode</th><th>Current Load %</th><th>CO2 (g/km/person)</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="field-row">
+        <label class="field-label-inline" for="partySize">Party size
+          <input id="partySize" type="number" class="number-input" min="1" max="10000" value="4" />
+        </label>
+        <label class="field-label-inline" for="distanceKm">Trip distance (km)
+          <input id="distanceKm" type="number" class="number-input" min="0.5" max="100" step="0.5" value="8" />
+        </label>
+      </div>
+
+      <button id="greenRouteBtn" class="btn btn-primary">Get GreenRoute Recommendation</button>
+      <div id="greenResult" class="result-box hidden"></div>
+      <div id="greenMetrics" class="metrics-row hidden"></div>
+    </section>
+
+    <!-- Control Room / Ops Commander -->
+    <section id="tab-ops" class="tab-panel">
+      <h2>Fused real-time situation report</h2>
+      <p class="muted">Ops Commander fuses Crowd Marshal + GreenRoute + the live incident log into one briefing.</p>
+
+      <div id="incidentLog" class="incident-log"></div>
+
+      <button id="opsBtn" class="btn btn-primary">Generate Situation Report</button>
+      <div id="opsResult" class="result-box hidden"></div>
+
+      <details id="opsSubDetails" class="hidden">
+        <summary>See individual sub-agent outputs that were fused</summary>
+        <pre id="opsSubJson"></pre>
+      </details>
+    </section>
+
+    <footer class="footer">
+      PulseArena AI — Wayfinder · Crowd Marshal · AccessAI Companion · GreenRoute · Ops Commander,
+      all reading from one shared Stadium Context Graph. Built for the FIFA World Cup 2026
+      GenAI Stadium Operations Hackathon.
+    </footer>
+  </main>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

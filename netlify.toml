@@ -1,0 +1,21 @@
+# netlify.toml
+#
+# This is the file that makes "connect the repo, click deploy, done" work.
+# No build command needed — it's a static site, so we just publish the
+# root as-is and point Netlify at the functions folder.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+  command = "echo 'No build step needed — static site.'"
+
+# Cleaner frontend calls: fetch('/api/generate') instead of the raw
+# /.netlify/functions/generate path.
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+
+[functions]
+  node_bundler = "esbuild"

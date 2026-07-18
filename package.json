@@ -1,0 +1,15 @@
+{
+  "name": "pulsearena-ai",
+  "version": "1.0.0",
+  "description": "GenAI operational intelligence mesh for FIFA World Cup 2026 stadiums — Netlify static site + serverless function.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "dev": "npx netlify-cli dev"
+  },
+  "license": "MIT"
+}
