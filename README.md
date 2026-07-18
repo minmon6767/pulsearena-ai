@@ -3,7 +3,7 @@
 [![CI](https://github.com/minmon6767/study-planner-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/minmon6767/study-planner-agent/actions/workflows/ci.yml)
 
 **Track 2 — AI Agent** · Summer of CodeFest 2.0 · GSDC Innovation Club x iNSiGHTS, VIT Bhopal
-**Author:** Pravil · [github.com/minmon6767](https://github.com/minmon6767)
+**Author:** Privil · [github.com/minmon6767](https://github.com/minmon6767)
 
 An agent that turns a scattered timetable, assignment deadlines, and study
 goals into a **transparent, editable weekly study plan** — and re-plans
@@ -88,11 +88,6 @@ Then in the sidebar, click **"Load sample data"** to populate a demo
 timetable, four assignments, and two standing goals, and click
 **"Generate weekly plan."**
 
-### Optional: enable the Claude narrative layer
-
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-```
 
 Without this, the app still runs end-to-end — the "Plan summary" panel
 just uses a deterministic templated summary instead of a Claude-generated
